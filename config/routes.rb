@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   resources :sleeps, only: [:index]
   resources :sleep_events, only: [:create]
-  resources :users, only: [:index] do
+  resources :users, only: [:index, :show] do
     resources :followers, only: [:index, :create]
-    delete "followers", to: "followers#destroy"
+  end
+  namespace :user do
+    resources :followers, only: [:index, :create]
+    resources :followings, only: [:index, :destroy]
   end
 end
