@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   namespace :user do
     resources :followers, only: [:index, :create]
     resources :followings, only: [:index, :destroy]
+    get "timeline", to: "timeline#index"
   end
 end
