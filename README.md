@@ -1,24 +1,59 @@
-# README
+# Goodnight
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Sleep Events
 
-Things you may want to cover:
+## Create
+- description: Create a sleep event for user. If the user not exists, system will create a user automatically. If the most recent sleep has not ended, this will be a wakeup event. Otherwise, this will be a sleep event.
+- POST `/sleep_events`
+- params: `username`
+- response: event (sleep/wakeup), sleep (sleep object, including start and end time)
 
-* Ruby version
+# Sleeps
 
-* System dependencies
+## Index
+- description: Sleeps of the user
+- GET `/sleeps`
+- params: `username`
+- response: array of sleeps of the user
 
-* Configuration
+# Users
 
-* Database creation
+## Index
+- description: show all users
+- GET `/users`
+- params: none
+- response: array of users
 
-* Database initialization
+# Users/Followers
 
-* How to run the test suite
+## Index
+- description: list all followers of the user in url param
+- GET `/users/:user_id/followers`
+- params: `user_id`
+- response: array of followers of the user
 
-* Services (job queues, cache servers, search engines, etc.)
+## Create
+- description: add current user to the followers of the user in url param
+- POST `/users/:user_id/followers`
+- params: `user_id`, `username`
+- response: array of followers of the user
 
-* Deployment instructions
+# User/Followers
+## Index
+- description: list all followers of the current user
+- GET `/user/followers`
+- params: `username`
+- response: array of followers of the current user
 
-* ...
+# User/Followings
+## Index
+- description: list all the users the current user is following
+- GET `/user/followings`
+- params: `username`
+- response: array of users the current user is following
+
+## Destroy
+- description: unfollow the user of url param
+- DELETE `/user/followings/:id`
+- params: `username`, `id`
+- response: array of users the current user is following
